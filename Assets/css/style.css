@@ -65,6 +65,13 @@ body {
     text-align: center;
 }
 
+.top-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .answers {
     display: grid;
     grid-template-columns: repeat(2, auto);
