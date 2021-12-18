@@ -14,23 +14,28 @@
     </header>
     <div id="quiz-main"class="quiz-main">
         <div class="container">
+            <h1 id="top-text" class="top-text">Coding Quiz Challenge</h1>
             <div id="welcome" class="welcome">
-                <h1 id="top-text" class="top-text">Coding Quiz Challenge</h1>
-                <p id="info-text" class="info-text">
+                <p id="welcome-text" class="welcome-text">
                     Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time/score by 10 seconds!
                 </p>
             </div>
             <div id="question-container" class="hidden">
-                <div id="answer-btn" class="answers">
-                    <button class="btn">Answer 1</button>
-                    <button class="btn">Answer 2</button>
-                    <button class="btn">Answer 3</button>
-                    <button class="btn">Answer 4</button>
+                <div id="answer-grid" class="answers">
+                    <button id="choice-one" class="btn answer-btn">Answer 1</button>
+                    <button id="choice-two" class="btn answer-btn">Answer 2</button>
+                    <button id="choice-three" class="btn answer-btn">Answer 3</button>
+                    <button id="choice-four" class="btn answer-btn">Answer 4</button>
                 </div>
+            </div>
+            <div id="results" class="hidden">
+                <form>
+                    <label for="initials">Initials:</label>
+                    <input type="text" id="initials" placeholder="Please type your initials here" />
+                </form>
             </div>
             <div class="controls">
                 <button id="start-btn" class="start-btn btn">Start Quiz</button>
-                <button id="next-btn" class="next-btn btn hidden">Next</button>
             </div>
         </div>
     </div>

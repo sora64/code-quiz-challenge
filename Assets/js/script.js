@@ -1,85 +1,112 @@
-var startButton = document.querySelector("#start-btn");
-var nextButton = document.querySelector("#next-btn");
-var questionContainerEl = document.querySelector("#question-container");
-var welcomeTextEl = document.querySelector("#info-text");
-var questionEl = document.querySelector("#top-text");
-var answerButtonsEl = document.querySelector("#answer-btn");
 
-var shuffleQuestions;
-var currentQuestonIndex;
+const startButtonEl = document.getElementById('start-btn');
+const topTextEl = document.getElementById('top-text');
+const welcomeTextEl = document.getElementById('welcome-text');
+const questionContainerEl = document.getElementById('question-container');
+const answerGridEl = document.getElementById('answer-grid');
+const answerOne = document.getElementById('choice-one');
+const answerTwo = document.getElementById('choice-two');
+const answerThree = document.getElementById('choice-three');
+const answerFour = document.getElementById('choice-four');
+const resultsEl = document.getElementById('results');
+const answerButtons = document.querySelectorAll(".answer-btn");
+let questionIndex = 0;
 
-startButton.addEventListener("click", startQuiz);
-nextButton.addEventListener("click", () => {
-    currentQuestonIndex++;
-    nextQuestion();
-});
+startButtonEl.addEventListener('click', startQuiz);
+answerOne.addEventListener('click', handleAnswer);
+answerTwo.addEventListener('click', handleAnswer);
+answerThree.addEventListener('click', handleAnswer);
+answerFour.addEventListener('click', handleAnswer);
+
 
 function startQuiz() {
-    startButton.className = "hidden";
-    welcomeTextEl.className = "hidden";
-    shuffleQuestions = questions.sort(() => Math.random() - .5);
-    currentQuestonIndex = 0;
-    questionContainerEl.classList.remove ("hidden");
-    nextQuestion();
-};
-
-function nextQuestion() {
-    resetChoices()
-    showQuestion(shuffleQuestions[currentQuestonIndex]);
-};
-
-function showQuestion(question) {
-    questionEl.textContent = question.question;
-    question.answers.forEach(answer => {
-        var button = document.createElement("button");
-        button.textContent = answer.text;
-        button.className = "btn";
-        if (answer.correct) {
-            button.dataset.correct = answer.correct;
-        }
-        button.addEventListener("click", chooseAnswer);
-        answerButtonsEl.appendChild(button);
-    })
-};
-
-function resetChoices() {
-    clearStatusClass(document.body);
-    nextButton.className = "hidden";
-    while(answerButtonsEl.firstChild) {
-        answerButtonsEl.removeChild(answerButtonsEl.firstChild)
-    }
-};
-
-function chooseAnswer(event) {
-    var userChoice = event.target;
-    var correct = userChoice.dataset.correct;
-    setStatusClass(document.body, correct);
-    Array.from(answerButtonsEl.children).forEach(button => {
-        setStatusClass(button, button.dataset.corect)
-    })
-    if (shuffleQuestions.length > currentQuestonIndex + 1) {
-        nextButton.classList.remove("hidden");
-    } else {
-        startButton.textContent = "Restart";
-        startButton.classList.remove("hidden");
-    }
-};
-
-function setStatusClass(element, correct) {
-    clearStatusClass(element);
-    if (correct) {
-        element.className = "correct";
-    } else {
-        element.className = "wrong";
-    }
-};
-
-function clearStatusClass(element) {
-    element.classList.remove("correct");
-    element.classList.remove("wrong");
+    welcomeTextEl.classList.add('hidden');
+    startButtonEl.classList.add('hidden');
+    showQuestion();
+    question();
 }
 
-var questions = [
+function showQuestion() {
+    questionContainerEl.classList.remove('hidden');
+}
+
+function question() {
+    if (questionIndex >= questions.length) {
+        resultsPage();
+    } else {
+    for (var i = 0; i < answerButtons.length; i++) {
+        answerButtons[i].textContent = questions[questionIndex].answers[i].text;
+        answerButtons[i].dataset.correct = questions[questionIndex].answers[i].correct;
+    }
+    topTextEl.textContent = questions[questionIndex].question;
+    
+    // answerTwo.textContent = questions[questionIndex].answers[1].text;
+    // answerTwo.dataset.correct = questions[questionIndex].answers[1].correct;
+    // answerThree.textContent = questions[questionIndex].answers[2].text;
+    // answerThree.dataset.correct = questions[questionIndex].answers[2].correct;
+    // answerFour.textContent = questions[questionIndex].answers[3].text;
+    // answerFour.dataset.correct = questions[questionIndex].answers[3].correct;
+    questionIndex++;
+    }
+}
+
+function handleAnswer(event) {
+    let correct = event.target.dataset.correct;
+    if (correct === "true") {
+        question();
+    } else {
+        alert("false");
+        question();
+    }
+}
+
+// function questionTwo() {
+//     topTextEl.textContent = questions[1].question;
+//     questionContainerEl.classList.remove('hidden');
+//     answerOne.textContent = questions[1].answers[0].text;
+//     answerTwo.textContent = questions[1].answers[1].text;
+//     answerThree.textContent = questions[1].answers[2].text;
+//     answerFour.textContent = questions[1].answers[3].text;
+//     answerTwo.addEventListener('click', questionThree);
+// }
+
+// function questionThree() {
+//     topTextEl.textContent = questions[2].question;
+//     questionContainerEl.classList.remove('hidden');
+//     answerOne.textContent = questions[2].answers[0].text;
+//     answerTwo.textContent = questions[2].answers[1].text;
+//     answerThree.textContent = questions[2].answers[2].text;
+//     answerFour.textContent = questions[2].answers[3].text;
+//     answerFour.addEventListener('click', questionFour);
+// }
+
+// function questionFour() {
+//     topTextEl.textContent = questions[3].question;
+//     questionContainerEl.classList.remove('hidden');
+//     answerOne.textContent = questions[3].answers[0].text;
+//     answerTwo.textContent = questions[3].answers[1].text;
+//     answerThree.textContent = questions[3].answers[2].text;
+//     answerFour.textContent = questions[3].answers[3].text;
+//     answerTwo.addEventListener('click', questionFive);
+// }
+
+// function questionFive() {
+//     topTextEl.textContent = questions[4].question;
+//     questionContainerEl.classList.remove('hidden');
+//     answerOne.textContent = questions[4].answers[0].text;
+//     answerTwo.textContent = questions[4].answers[1].text;
+//     answerThree.textContent = questions[4].answers[2].text;
+//     answerFour.textContent = questions[4].answers[3].text;
+//     answerOne.addEventListener('click', resultsPage);
+// }
+
+function resultsPage() {
+    topTextEl.textContent = "Add Your Initals Below";
+    questionContainerEl.classList.add('hidden');
+    resultsEl.classList.remove('hidden');
+}
+
+const questions = [
     {
         question: "Commonly used data types do NOT include...",
         answers: [
@@ -94,8 +121,8 @@ var questions = [
         question: "The condition in an if/else statement is enclosed within...",
         answers: [
             { text: "quotes", correct: false },
-            { text: "curly brackets", correct: false },
             { text: "parentheses", correct: true },
+            { text: "curly brackets", correct: false },
             { text: "square brackets", correct: false }
         ]
     },
@@ -114,19 +141,19 @@ var questions = [
         question: "Within what must string values be enclosed when being assigned to variables?",
         answers: [
             { text: "commas", correct: false },
+            { text: "quotes", correct: true },
             { text: "curly brackets", correct: false },
-            { text: "quotes", correct: false },
-            { text: "parentheses", correct: true }
+            { text: "parentheses", correct: false }
         ]
     },
 
     {
         question: "A very useful tool used during development and debugin for printing content to the debugger is...",
         answers: [
+            { text: "console.log", correct: true },
             { text: "JavaScript", correct: false },
             { text: "terminal/bash", correct: false },
-            { text: "for loops", correct: false },
-            { text: "console.log", correct: true }
+            { text: "for loops", correct: false }
         ]
     }
 ];
