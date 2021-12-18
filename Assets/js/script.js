@@ -23,16 +23,16 @@ function startQuiz() {
     welcomeTextEl.classList.add('hidden');
     startButtonEl.classList.add('hidden');
     showQuestion();
-    question();
+    nextQuestion();
 }
 
 function showQuestion() {
     questionContainerEl.classList.remove('hidden');
 }
 
-function question() {
+function nextQuestion() {
     if (questionIndex >= questions.length) {
-        resultsPage();
+        initialsPage();
     } else {
         for (var i = 0; i < answerButtonsEl.length; i++) {
             answerButtonsEl[i].textContent = questions[questionIndex].answers[i].text;
@@ -47,14 +47,14 @@ function question() {
 function handleAnswer(event) {
     let correct = event.target.dataset.correct;
     if (correct === "true") {
-        question();
+        nextQuestion();
     } else {
         alert("false");
-        question();
+        nextQuestion();
     }
 }
 
-function resultsPage() {
+function initialsPage() {
     topTextEl.textContent = "Add Your Initals Below";
     questionContainerEl.classList.add('hidden');
     resultsEl.classList.remove('hidden');
