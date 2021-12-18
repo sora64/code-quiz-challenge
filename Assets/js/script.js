@@ -128,5 +128,5 @@ var questions = [
             { text: "for loops", correct: false },
             { text: "console.log", correct: true }
         ]
-    },
+    }
 ];
