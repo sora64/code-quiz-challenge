@@ -10,6 +10,8 @@
     --indigo: #4B0082;
     --white: #FFF;
     --black: #000;
+    --correct: green; 
+    --wrong: red; 
 }
 
 body {
@@ -28,7 +30,7 @@ body {
     top: 0;
 }
 
-.header .hs-linker {
+.hs-linker {
     color: var(--orchid);
     font-weight: 800;
 }
@@ -42,6 +44,14 @@ body {
     justify-content: center;
     align-items: center;
     background-color: var(--basic);
+}
+
+.quiz-main.correct {
+    background-color: var(--correct);
+}
+
+.quiz-main.wrong {
+    background-color: var(--wrong);
 }
 
 .container {
@@ -92,6 +102,15 @@ body {
 
 .btn:hover {
     background-color: var(--orchid);
+}
+
+.btn.correct {
+    background-color: var(--correct);
+    color: black;
+}
+
+.btn.wrong {
+    background-color: var(--wrong);
 }
 
 .start-btn, .next-btn {
