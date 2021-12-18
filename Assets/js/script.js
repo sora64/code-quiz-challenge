@@ -9,7 +9,7 @@ const answerTwo = document.getElementById('choice-two');
 const answerThree = document.getElementById('choice-three');
 const answerFour = document.getElementById('choice-four');
 const resultsEl = document.getElementById('results');
-const answerButtons = document.querySelectorAll(".answer-btn");
+const answerButtonsEl = document.querySelectorAll(".answer-btn");
 let questionIndex = 0;
 
 startButtonEl.addEventListener('click', startQuiz);
@@ -34,19 +34,13 @@ function question() {
     if (questionIndex >= questions.length) {
         resultsPage();
     } else {
-    for (var i = 0; i < answerButtons.length; i++) {
-        answerButtons[i].textContent = questions[questionIndex].answers[i].text;
-        answerButtons[i].dataset.correct = questions[questionIndex].answers[i].correct;
-    }
-    topTextEl.textContent = questions[questionIndex].question;
-    
-    // answerTwo.textContent = questions[questionIndex].answers[1].text;
-    // answerTwo.dataset.correct = questions[questionIndex].answers[1].correct;
-    // answerThree.textContent = questions[questionIndex].answers[2].text;
-    // answerThree.dataset.correct = questions[questionIndex].answers[2].correct;
-    // answerFour.textContent = questions[questionIndex].answers[3].text;
-    // answerFour.dataset.correct = questions[questionIndex].answers[3].correct;
-    questionIndex++;
+        for (var i = 0; i < answerButtonsEl.length; i++) {
+            answerButtonsEl[i].textContent = questions[questionIndex].answers[i].text;
+            answerButtonsEl[i].dataset.correct = questions[questionIndex].answers[i].correct;
+        }
+        topTextEl.textContent = questions[questionIndex].question;
+        
+        questionIndex++;
     }
 }
 
@@ -59,46 +53,6 @@ function handleAnswer(event) {
         question();
     }
 }
-
-// function questionTwo() {
-//     topTextEl.textContent = questions[1].question;
-//     questionContainerEl.classList.remove('hidden');
-//     answerOne.textContent = questions[1].answers[0].text;
-//     answerTwo.textContent = questions[1].answers[1].text;
-//     answerThree.textContent = questions[1].answers[2].text;
-//     answerFour.textContent = questions[1].answers[3].text;
-//     answerTwo.addEventListener('click', questionThree);
-// }
-
-// function questionThree() {
-//     topTextEl.textContent = questions[2].question;
-//     questionContainerEl.classList.remove('hidden');
-//     answerOne.textContent = questions[2].answers[0].text;
-//     answerTwo.textContent = questions[2].answers[1].text;
-//     answerThree.textContent = questions[2].answers[2].text;
-//     answerFour.textContent = questions[2].answers[3].text;
-//     answerFour.addEventListener('click', questionFour);
-// }
-
-// function questionFour() {
-//     topTextEl.textContent = questions[3].question;
-//     questionContainerEl.classList.remove('hidden');
-//     answerOne.textContent = questions[3].answers[0].text;
-//     answerTwo.textContent = questions[3].answers[1].text;
-//     answerThree.textContent = questions[3].answers[2].text;
-//     answerFour.textContent = questions[3].answers[3].text;
-//     answerTwo.addEventListener('click', questionFive);
-// }
-
-// function questionFive() {
-//     topTextEl.textContent = questions[4].question;
-//     questionContainerEl.classList.remove('hidden');
-//     answerOne.textContent = questions[4].answers[0].text;
-//     answerTwo.textContent = questions[4].answers[1].text;
-//     answerThree.textContent = questions[4].answers[2].text;
-//     answerFour.textContent = questions[4].answers[3].text;
-//     answerOne.addEventListener('click', resultsPage);
-// }
 
 function resultsPage() {
     topTextEl.textContent = "Add Your Initals Below";
