@@ -19,6 +19,10 @@ body {
     height: 100vh;
 }
 
+.hidden {
+    display: none;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -31,6 +35,10 @@ body {
 .hs-linker {
     color: var(--orchid);
     font-weight: 800;
+}
+
+.hs-linker:hover {
+    color: var(--white)
 }
 
 .timer-container {
@@ -128,8 +136,12 @@ body {
     align-items: center;
 }
 
-.hidden {
+#results {
     display: none;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--basic);
+    margin-bottom: 1em;
 }
 
 .score-container {
@@ -138,10 +150,25 @@ body {
     align-items: center;
 }
 
-.score-value {
+#score-value {
     padding-left: .8rem;
+}
+
+.initials-value {
+    padding-left: .8rem;
+}
+
+.score-container, .username-container {
+    display: flex;
+    justify-content: start;
+    align-items: left;
 }
 
 .submit-btn {
     font-size:.8rem;
+}
+
+.end-buttons {
+    display: flex;
+    justify-content: space-between;
 }

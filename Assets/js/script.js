@@ -1,4 +1,5 @@
 
+const viewHighScoresEL = document.getElementById('hs-link');
 const timerEl = document.getElementById('timer');
 const startButtonEl = document.getElementById('start-btn');
 const topTextEl = document.getElementById('top-text');
@@ -11,41 +12,48 @@ const answerThree = document.getElementById('choice-three');
 const answerFour = document.getElementById('choice-four');
 const resultsEl = document.getElementById('results');
 const answerButtonsEl = document.querySelectorAll('.answer-btn');
-const scoreValueEl = document.getElementById('score-value')
+const scoreValueEl = document.getElementById('score-value');
+const inputFormEl = document.getElementById('input-form');
+const inputValueEl = document.getElementById('initials');
+const initialValueEl = document.querySelector('.initials-value');
+const submitButtonEl = document.getElementById('submit-btn');
+const highScoreEl = document.getElementById('high-score-container');
+const restartButtonEl = document.getElementById('restart-btn');
+const clearHighScoresButtonEl = document.getElementById('clear-high-scores-btn');
 
 let questionIndex = 0;
+let timeLeft = 75;
 let score = [];
+let username = [];
 
+// viewHighScoresEL.addEventListener('click', getInputValue);
 startButtonEl.addEventListener('click', startQuiz);
 answerOne.addEventListener('click', handleAnswer);
 answerTwo.addEventListener('click', handleAnswer);
 answerThree.addEventListener('click', handleAnswer);
 answerFour.addEventListener('click', handleAnswer);
+submitButtonEl.addEventListener('click', submit);
+restartButtonEl.addEventListener('click', restart);
+clearHighScoresButtonEl.addEventListener('click', clearHighScores);
 
 function timer() {
-    let timeLeft = 75;
-
     var timeInterval = setInterval(function() {
         if (timeLeft >= 1) {
-            timerEl.textContent = timeLeft;
             timeLeft--;
+            timerEl.textContent = timeLeft;
         } else {
-            timerEl.textContent = "Timer: 0";
+            timerEl.textContent = "0";
             clearInterval(timeInterval);
-            if(confirm("You ran out of time! Would you like to try again?") == true) {
-                location.reload();
-            } else {
-                initialsPage();
-            }
+            initialsPage();
         };
-    }, 750)
+    }, 1000);
 }
 
 function startQuiz() {
+    timer();
     welcomeTextEl.classList.add('hidden');
     startButtonEl.classList.add('hidden');
     showQuestion();
-    timer();
     nextQuestion();
 }
 
@@ -55,8 +63,8 @@ function showQuestion() {
 
 function nextQuestion() {
     if (questionIndex >= questions.length) {
+        localStorage.setItem('score', JSON.stringify(timerEl.textContent));
         initialsPage();
-        localStorage.setItem('score', JSON.stringify(timerEl.innerText));
     } else {
         for (var i = 0; i < answerButtonsEl.length; i++) {
             answerButtonsEl[i].textContent = questions[questionIndex].answers[i].text;
@@ -73,14 +81,18 @@ function handleAnswer(event) {
     if (correct === "true") {
         nextQuestion();
     } else {
-        alert("false");
-        nextQuestion();
+        timeLeft -= 10;
+        alert("Wrong!");
     }
 }
 
 function initialsPage() {
+    resultsEl.style.display = "flex";
     topTextEl.textContent = "Add Your Initals Below";
+    timerEl.classList.add('hidden');
+    timeLeft = undefined;
     questionContainerEl.classList.add('hidden');
+    highScoreEl.classList.add('hidden');
     resultsEl.classList.remove('hidden');
     getScore();
 }
@@ -96,9 +108,55 @@ function getScore() {
     
     score.push(savedScore);
 
-    scoreValueEl.textContent = score[0];
+    for (var i = 0; i < score.length; i++) {
+        scoreValueEl.textContent = score[i];
+    }
+}
+
+function submit(event) {
+    event.preventDefault();
+    setInputValue();
+}
+
+function setInputValue() {
+    localStorage.setItem('user', JSON.stringify(inputValueEl.value));
+    getInputValue();
+}
+
+function getInputValue() {
+    let savedName = localStorage.getItem('user');
     
-    console.dir(score[0]);
+    console.log("Saved name found!")
+
+    savedName = JSON.parse(savedName);
+
+    username.push(savedName);
+
+    for (var i = 0; i < username.length; i++) {
+        initialValueEl.textContent = username[i];
+    }
+
+    highScorePage();
+}
+
+function highScorePage() {
+    inputFormEl.classList.add('hidden');
+    welcomeTextEl.classList.add('hidden');
+    highScoreEl.classList.remove('hidden');
+    restartButtonEl.classList.remove('hidden');
+    clearHighScoresButtonEl.classList.remove('hidden');
+    topTextEl.textContent = 'Scores';
+}
+
+function restart() {
+    location.reload();
+}
+
+function clearHighScores() {
+    localStorage.clear();
+    clearHighScoresButtonEl.classList.add('hidden');
+    topTextEl.textContent = "So long!";
+    resultsEl.textContent = '';
 }
 
 const questions = [
@@ -143,7 +201,7 @@ const questions = [
     },
 
     {
-        question: "A very useful tool used during development and debugin for printing content to the debugger is...",
+        question: "A very useful tool used during development and debugging for printing content to the debugger is...",
         answers: [
             { text: "console.log", correct: true },
             { text: "JavaScript", correct: false },
