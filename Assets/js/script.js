@@ -38,7 +38,7 @@ restartButtonEl.addEventListener('click', restart);
 clearHighScoresButtonEl.addEventListener('click', clearHighScores);
 
 function timer() {
-    var timeInterval = setInterval(function() {
+    let timeInterval = setInterval(function() {
         if (timeLeft >= 1) {
             timeLeft--;
             timerEl.textContent = timeLeft;
