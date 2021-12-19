@@ -140,6 +140,7 @@ function getInputValue() {
         initialValueEl.textContent = username[i];
     }
 
+    timerStop();
     highScorePage();
 }
 
