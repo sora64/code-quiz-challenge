@@ -24,33 +24,25 @@ body {
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
+    position: sticky;
+    position: -webkit-sticky;
     align-items: center;
-    padding: .25rem 1rem;
     background-color:dimgray;
     top: 0;
-}
-
-.hs-linker {
-    color: var(--orchid);
-    font-weight: 800;
-}
-
-.hs-linker:hover {
-    color: var(--white)
+    height: 10vh;
 }
 
 .timer-container {
-    font-size: 16px;
+    font-size: 1.5rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     font-weight: 800;
+    color: var(--orchid);
 }
 
 .timer {
-    font-size: 13px;
+    font-size: 1.2rem;
     padding-left: .5rem;
 }
 
