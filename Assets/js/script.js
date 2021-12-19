@@ -1,4 +1,5 @@
 
+const quizMainEL = document.getElementById('quiz-main');
 const viewHighScoresEL = document.getElementById('hs-link');
 const timerEl = document.getElementById('timer');
 const startButtonEl = document.getElementById('start-btn');
@@ -26,7 +27,7 @@ let timeLeft = 75;
 let score = [];
 let username = [];
 
-// viewHighScoresEL.addEventListener('click', getInputValue);
+viewHighScoresEL.addEventListener('click', viewHighScores);
 startButtonEl.addEventListener('click', startQuiz);
 answerOne.addEventListener('click', handleAnswer);
 answerTwo.addEventListener('click', handleAnswer);
@@ -141,7 +142,6 @@ function getInputValue() {
 
 function highScorePage() {
     inputFormEl.classList.add('hidden');
-    welcomeTextEl.classList.add('hidden');
     highScoreEl.classList.remove('hidden');
     restartButtonEl.classList.remove('hidden');
     clearHighScoresButtonEl.classList.remove('hidden');
@@ -157,6 +157,13 @@ function clearHighScores() {
     clearHighScoresButtonEl.classList.add('hidden');
     topTextEl.textContent = "So long!";
     resultsEl.textContent = '';
+}
+
+function viewHighScores() {
+    welcomeTextEl.classList.add('hidden');
+    startButtonEl.classList.add('hidden');
+    resultsEl.classList.remove('hidden');
+    highScorePage()
 }
 
 const questions = [
@@ -186,7 +193,7 @@ const questions = [
             { text: "numbers and strings", correct: false },
             { text: "other arrays", correct: false },
             { text: "booleans", correct: false },
-            { text: "all of the above", correct: true }
+            { text: "all of these", correct: true }
         ]
     },
 
@@ -203,9 +210,9 @@ const questions = [
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is...",
         answers: [
-            { text: "console.log", correct: true },
+            { text: "terminal/bash", correct: true },
+            { text: "console.log", correct: false },
             { text: "JavaScript", correct: false },
-            { text: "terminal/bash", correct: false },
             { text: "for loops", correct: false }
         ]
     }
