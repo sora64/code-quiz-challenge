@@ -1,4 +1,5 @@
 
+const timerEl = document.getElementById('timer');
 const startButtonEl = document.getElementById('start-btn');
 const topTextEl = document.getElementById('top-text');
 const welcomeTextEl = document.getElementById('welcome-text');
@@ -9,8 +10,11 @@ const answerTwo = document.getElementById('choice-two');
 const answerThree = document.getElementById('choice-three');
 const answerFour = document.getElementById('choice-four');
 const resultsEl = document.getElementById('results');
-const answerButtonsEl = document.querySelectorAll(".answer-btn");
+const answerButtonsEl = document.querySelectorAll('.answer-btn');
+const scoreValueEl = document.getElementById('score-value')
+
 let questionIndex = 0;
+let score = [];
 
 startButtonEl.addEventListener('click', startQuiz);
 answerOne.addEventListener('click', handleAnswer);
@@ -18,11 +22,30 @@ answerTwo.addEventListener('click', handleAnswer);
 answerThree.addEventListener('click', handleAnswer);
 answerFour.addEventListener('click', handleAnswer);
 
+function timer() {
+    let timeLeft = 75;
+
+    var timeInterval = setInterval(function() {
+        if (timeLeft >= 1) {
+            timerEl.textContent = timeLeft;
+            timeLeft--;
+        } else {
+            timerEl.textContent = "Timer: 0";
+            clearInterval(timeInterval);
+            if(confirm("You ran out of time! Would you like to try again?") == true) {
+                location.reload();
+            } else {
+                initialsPage();
+            }
+        };
+    }, 750)
+}
 
 function startQuiz() {
     welcomeTextEl.classList.add('hidden');
     startButtonEl.classList.add('hidden');
     showQuestion();
+    timer();
     nextQuestion();
 }
 
@@ -33,6 +56,7 @@ function showQuestion() {
 function nextQuestion() {
     if (questionIndex >= questions.length) {
         initialsPage();
+        localStorage.setItem('score', JSON.stringify(timerEl.innerText));
     } else {
         for (var i = 0; i < answerButtonsEl.length; i++) {
             answerButtonsEl[i].textContent = questions[questionIndex].answers[i].text;
@@ -58,6 +82,23 @@ function initialsPage() {
     topTextEl.textContent = "Add Your Initals Below";
     questionContainerEl.classList.add('hidden');
     resultsEl.classList.remove('hidden');
+    getScore();
+}
+
+function getScore() {
+    let savedScore = localStorage.getItem('score');
+    if(!savedScore) {
+        return false;
+    }
+    console.log("Saved score found!")
+    
+    savedScore = JSON.parse(savedScore);
+    
+    score.push(savedScore);
+
+    scoreValueEl.textContent = score[0];
+    
+    console.dir(score[0]);
 }
 
 const questions = [

@@ -33,6 +33,19 @@ body {
     font-weight: 800;
 }
 
+.timer-container {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: 800;
+}
+
+.timer {
+    font-size: 13px;
+    padding-left: .5rem;
+}
+
 .quiz-main {
     padding: 0;
     margin: 0;
@@ -117,4 +130,18 @@ body {
 
 .hidden {
     display: none;
+}
+
+.score-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.score-value {
+    padding-left: .8rem;
+}
+
+.submit-btn {
+    font-size:.8rem;
 }
