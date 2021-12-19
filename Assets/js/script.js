@@ -35,22 +35,18 @@ submitButtonEl.addEventListener('click', submit);
 restartButtonEl.addEventListener('click', restart);
 clearHighScoresButtonEl.addEventListener('click', clearHighScores);
 
-const timeInterval = setInterval(timer, 1000);
-
 function timer() {
-    if (timeLeft >= 1) {
-        timeLeft--;
-        timerEl.textContent = timeLeft;
-    } else {
-        alert("You're out of time! Please try again.");
-        localStorage.setItem("score", JSON.stringify(0));
-        clearInterval(timeInterval);
-        initialsPage();
-    }
-}
-
-function timerStop() {
-    clearInterval(timeInterval);
+    let timeInterval = setInterval(function() {
+        if (timeLeft >= 1) {
+            timeLeft--;
+            timerEl.textContent = timeLeft;
+        } else {
+            alert("You're out of time! Please try again.");
+            localStorage.setItem("score", JSON.stringify(0));
+            clearInterval(timeInterval);
+            initialsPage();
+        }
+    }, 1000);
 }
 
 function startQuiz() {
@@ -68,7 +64,6 @@ function showQuestion() {
 function nextQuestion() {
     if (questionIndex >= questions.length) {
         localStorage.setItem('score', JSON.stringify(timerEl.textContent));
-        timerStop();
         initialsPage();
     } else {
         for (var i = 0; i < answerButtonsEl.length; i++) {
@@ -140,7 +135,6 @@ function getInputValue() {
         initialValueEl.textContent = username[i];
     }
 
-    timerStop();
     highScorePage();
 }
 
