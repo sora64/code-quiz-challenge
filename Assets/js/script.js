@@ -12,6 +12,7 @@ const answerThree = document.getElementById('choice-three');
 const answerFour = document.getElementById('choice-four');
 const resultsEl = document.getElementById('results');
 const answerButtonsEl = document.querySelectorAll('.answer-btn');
+const scoreContainerEL = document.getElementById('score-container');
 const scoreValueEl = document.getElementById('score-value');
 const inputFormEl = document.getElementById('input-form');
 const initialLabelEl = document.getElementById('initial-label');
@@ -89,6 +90,7 @@ function handleAnswer(event) {
 
 function initialsPage() {
     resultsEl.style.display = "flex";
+    scoreContainerEL.classList.add('hidden');
     topTextEl.textContent = "Add Your Initals Below";
     // timerEl.classList.add('hidden');
     questionContainerEl.classList.add('hidden');
@@ -147,7 +149,7 @@ function highScorePage() {
     highScoreEl.classList.remove('hidden');
     restartButtonEl.classList.remove('hidden');
     clearHighScoresButtonEl.classList.remove('hidden');
-    topTextEl.textContent = 'Scores';
+    topTextEl.textContent = 'Score';
 }
 
 function restart() {
