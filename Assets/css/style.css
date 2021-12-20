@@ -159,3 +159,47 @@ body {
     display: flex;
     justify-content: space-between;
 }
+
+@media screen and (max-width: 575px) {
+    .btn {
+        font-size: 0.7rem;
+    }
+
+    #results {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 0.7rem;
+        padding: 0.2rem;
+        font-size: 0.8rem;
+    }
+
+    .score-container {
+        justify-content: center;
+    }
+    
+    #score-value {
+        padding-left: .3rem;
+    }
+    
+    .initials-value {
+        padding-left: .3rem;
+    }
+    
+    .score-container, .username-container {
+        justify-content: center;
+        align-items: center;
+    }
+
+    #input-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .submit-btn {
+        margin-top: 10px;
+    }
+}

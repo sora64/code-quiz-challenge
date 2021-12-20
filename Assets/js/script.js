@@ -14,6 +14,7 @@ const resultsEl = document.getElementById('results');
 const answerButtonsEl = document.querySelectorAll('.answer-btn');
 const scoreValueEl = document.getElementById('score-value');
 const inputFormEl = document.getElementById('input-form');
+const initialLabelEl = document.getElementById('initial-label');
 const inputValueEl = document.getElementById('initials');
 const initialValueEl = document.querySelector('.initials-value');
 const submitButtonEl = document.getElementById('submit-btn');
@@ -140,6 +141,9 @@ function getInputValue() {
 
 function highScorePage() {
     inputFormEl.classList.add('hidden');
+    initialLabelEl.classList.add('hidden');
+    inputValueEl.classList.add('hidden');
+    submitButtonEl.classList.add('hidden');
     highScoreEl.classList.remove('hidden');
     restartButtonEl.classList.remove('hidden');
     clearHighScoresButtonEl.classList.remove('hidden');
