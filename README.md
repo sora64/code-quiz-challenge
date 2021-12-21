@@ -9,3 +9,7 @@
 * create a timer that counts down and that decreases by 10 seconds if the user selects a wrong answer on the quiz.
 * make it so that the quiz is over if either the clock runs down to 0 seconds or if all questions are answered correctly.
 * allow the user to record their score and initials in their client's local storage after finishing the quiz, and then displayed those values on the screen for them to see.
+
+[Link to Deployed Application](https://sora64.github.io/code-quiz-challenge/)
+
+![Screnshot of Deployed Application](/Assets/Images/Code-Quiz-Challeng-Phelps-ScrShot.png)
