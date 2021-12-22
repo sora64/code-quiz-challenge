@@ -1,4 +1,4 @@
-
+// global constants used throughout the code that won't change
 const quizMainEL = document.getElementById('quiz-main');
 const timerEl = document.getElementById('timer');
 const startButtonEl = document.getElementById('start-btn');
@@ -23,11 +23,13 @@ const highScoreEl = document.getElementById('high-score-container');
 const restartButtonEl = document.getElementById('restart-btn');
 const clearHighScoresButtonEl = document.getElementById('clear-high-scores-btn');
 
+// global variables used throughout the code that may change in value
 let questionIndex = 0;
 let timeLeft = 75;
 let score = [];
 let username = [];
 
+// event listeners for different buttons on the page
 startButtonEl.addEventListener('click', startQuiz);
 answerOne.addEventListener('click', handleAnswer);
 answerTwo.addEventListener('click', handleAnswer);
@@ -37,6 +39,7 @@ submitButtonEl.addEventListener('click', submit);
 restartButtonEl.addEventListener('click', restart);
 clearHighScoresButtonEl.addEventListener('click', clearHighScores);
 
+// function that counts down from 75 once the start button is clicked
 function timer() {
     let timeInterval = setInterval(function() {
         if (timeLeft >= 1) {
@@ -51,6 +54,7 @@ function timer() {
     }, 1000);
 }
 
+// goes to the first question of the quiz when the start button is pressed
 function startQuiz() {
     timer();
     welcomeTextEl.classList.add('hidden');
@@ -59,10 +63,12 @@ function startQuiz() {
     nextQuestion();
 }
 
+// displays the question container on the page
 function showQuestion() {
     questionContainerEl.classList.remove('hidden');
 }
 
+// goes to the next question based on the current question's index
 function nextQuestion() {
     if (questionIndex >= questions.length) {
         localStorage.setItem('score', JSON.stringify(timerEl.textContent));
@@ -78,6 +84,7 @@ function nextQuestion() {
     }
 }
 
+// tells the page what to do in the event that the user selects the correct answer for a question or not
 function handleAnswer(event) {
     let correct = event.target.dataset.correct;
     if (correct === "true") {
@@ -88,6 +95,8 @@ function handleAnswer(event) {
     }
 }
 
+
+// function for the element wherein a user will input their initials
 function initialsPage() {
     resultsEl.style.display = "flex";
     scoreContainerEL.classList.add('hidden');
@@ -99,6 +108,7 @@ function initialsPage() {
     getScore();
 }
 
+// gets the score (remaining time) from local storage and then displays it on the page
 function getScore() {
     let savedScore = localStorage.getItem('score');
     if(!savedScore) {
@@ -115,16 +125,19 @@ function getScore() {
     }
 }
 
+// defines that happens when the submit button in the intials element is clicked
 function submit(event) {
     event.preventDefault();
     setInputValue();
 }
 
+// saves user-input initals onto the client's local storage
 function setInputValue() {
     localStorage.setItem('user', JSON.stringify(inputValueEl.value));
     getInputValue();
 }
 
+// retrieves user-input intiials form local storage
 function getInputValue() {
     let savedName = localStorage.getItem('user');
     
@@ -141,6 +154,7 @@ function getInputValue() {
     highScorePage();
 }
 
+// displays the user's initials alongside their score on the quiz
 function highScorePage() {
     inputFormEl.classList.add('hidden');
     initialLabelEl.classList.add('hidden');
@@ -152,10 +166,12 @@ function highScorePage() {
     topTextEl.textContent = 'Score';
 }
 
+// reloads the page when the restart button is clicked
 function restart() {
     location.reload();
 }
 
+// clears local storage when the clear scores button is clicked
 function clearHighScores() {
     localStorage.clear();
     clearHighScoresButtonEl.classList.add('hidden');
@@ -163,6 +179,7 @@ function clearHighScores() {
     resultsEl.textContent = '';
 }
 
+// constant variable containing the quiz's questions and available answers
 const questions = [
     {
         question: "Commonly used data types do NOT include...",

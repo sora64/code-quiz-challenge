@@ -4,24 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- linked css file -->
     <link href="./Assets/css/style.css" rel="stylesheet">
     <title>Code Quiz</title>
 </head>
 <body">
+    <!-- begin header -->
     <header id="header" class="header">
         <div id="timer-container" class="timer-container">
             <h5 id="timer-text" class="timer-text">Timer: </h5>
             <div id="timer" class="timer">75</div>
         </div>
     </header>
+    <!-- end header -->
+    <!-- begin main content of the page-->
     <div id="quiz-main"class="quiz-main">
         <div class="container">
+            <!-- text at the top of the page's main elements, showing questions or important information as those elements change and are replaced -->
             <h1 id="top-text" class="top-text">Coding Quiz Challenge</h1>
+            <!-- first form of the element that users see when loading the page -->
             <div id="welcome" class="welcome">
                 <p id="welcome-text" class="welcome-text">
                     Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time/score by 10 seconds!
                 </p>
             </div>
+            <!-- where the quiz's questions are displayed -->
             <div id="question-container" class="hidden">
                 <div id="answer-grid" class="answers">
                     <button id="choice-one" class="btn answer-btn">Answer 1</button>
@@ -30,6 +37,7 @@
                     <button id="choice-four" class="btn answer-btn">Answer 4</button>
                 </div>
             </div>
+            <!-- where the user inputs intiials, then sees their score alongside those initials printed to the page -->
             <div id="results" class="hidden">
                 <div id="high-score-container" class="high-score-container">
                     <div class="username-container">
@@ -50,6 +58,7 @@
                     <button type="submit" id ="submit-btn" class="submit-btn btn">Submit</button>
                 </form>
             </div>
+            <!-- various buttons used to control the page either at the start or the end of the quiz -->
             <div class="controls">
                 <button id="start-btn" class="start-btn btn">Start Quiz</button>
                 <div id="end-buttons">
@@ -59,6 +68,8 @@
             </div>
         </div>
     </div>
+    <!-- end main content of the page-->
 </body>
+<!-- linked .js file -->
 <script src="./Assets/js/script.js"></script>
 </html>
