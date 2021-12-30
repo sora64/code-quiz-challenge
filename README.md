@@ -12,4 +12,4 @@
 
 [Link to Deployed Application](https://sora64.github.io/code-quiz-challenge/)
 
-![Screnshot of Deployed Application](/Assets/Images/Code-Quiz-Challeng-Phelps-ScrShot.png)
+![Screnshot of Deployed Application](./Assets/Images/Code-Quiz-Challeng-Phelps-ScrShot.png)
